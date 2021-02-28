@@ -3,17 +3,17 @@ from player import HumanPlayer, RandomComputerPlayer
 
 class TicTacToe:
     def __init__(self):
-        self.board = [' ' for _ in range(9)]
-        # we will use a single list of length 9
-        # that will represent the 3*3 board
-        self.current_winner = None # to keep track of winner
+        self.board = [' ' for _ in range(9)]    # a single list of length 9 to represent 3*3 board
+                                                # the indexes we assign to this list will represent the board
+        self.current_winner = None  # to keep track of winner
     
     def print_board(self):
-        for row in [self.board[i*3:(i+1)*3] for i in range(3)]:  
-        # Line 9 creates a slice (from "start" to "end," exclusive of "end")
-        # Range() in Python is exclusive of user's input, so this encompasses 0,1,2
+        for row in [self.board[i*3:(i+1)*3] for i in range(3)]: 
+        # the above is a slice (i.e., 'start':'end'); 'range(3)' is for each row, meaning indices of 0, 1, and 2
         # the range bracket creates three "self-contained" slices of indices, like this:
-            # [0,1,2],[3,4,5],[6,7,8]
+                # 0:3    (0,1,2) <-index positions
+                # 3:6    (3,4,5) <- same
+                # 6:8    (6,7,8) <- same
         # we make a list out of the elements, further divided into another list every third item.
         # it indexes into our len 9 list
         
