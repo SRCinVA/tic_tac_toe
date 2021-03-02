@@ -3,28 +3,36 @@ from player import HumanPlayer, RandomComputerPlayer
 
 class TicTacToe:
     def __init__(self):
-        self.board = [' ' for _ in range(9)]    # a single list of length 9 to represent 3*3 board
+        self.board = [' ' for _ in range(9)]    # a single list of length 9 to rep 3*3 board
                                                 # the indexes we assign to this list will represent the board
         self.current_winner = None  # to keep track of winner
     
     def print_board(self):
         for row in [self.board[i*3:(i+1)*3] for i in range(3)]: 
-        # the above is a slice (i.e., 'start':'end'); 'range(3)' is for each row, meaning indices of 0, 1, and 2
-        # the range bracket creates three "self-contained" slices of indices, like this:
+        # the large bracketed statement is indexing into the len 9 list defined above
+        # the result of each of those iterations (for i in range (3)) is a row "chunk" of the final board
+        # the innermost is a slice (i.e., 'start':'end'); 'range(3)' is for each row, meaning indices of 0, 1, and 2 (upper-bound exclusive)
+        # the range bracket creates three "self-contained" chunks of indices, like this:
                 # 0:3    (0,1,2) <-index positions
-                # 3:6    (3,4,5) <- same
-                # 6:8    (6,7,8) <- same
-        # we make a list out of the elements, further divided into another list every third item.
-        # it indexes into our len 9 list
+                # 3:6    (3,4,5) <-index positions
+                # 6:8    (6,7,8) <-index positions
         
             print('| ' + ' | '.join(row) + ' |')
-            # print the first pipe; join() method intersperses the pipe between the iterables; print the last pipe.
+            # 1.) print the first pipe; 
+            # 2.) the join() method intersperses the pipe(s or however many required?) 
+            #     between the iterables present in [row] from above; 
+            # 3.) print the last pipe.
     
     @staticmethod # static methods are methods bound to the class, not the object
     def print_board_nums(): # this doesn't relate to any specific board, so we don't have to pass in self (makes sense).
         number_board = [[str(i) for i in range(j*3, (j+1)*3)] for j in range(3)]
-        # inner list gives the indices present in a single row.
-        # outer list gives all of the rows.
+        # iterating over 'j' feeds in exactly like printing the board, to manufacture all of the row "chunks"
+        # "this is saying 'give me the indices of thw rows, for all of the rows'."
+        # question: unsure what's going on with str(i) here ...
+        # "i" is probably the "x" or "o" that gets dropped into the (0,1,2) or (3,4,5) or (6,7,8)
+        # that is created by the iteration over 'j'
+        
+        # now, we concatenate the strings and print the board, like above:
         for row in number_board:
             print('| ' + ' | '.join(row) + ' |')
 
