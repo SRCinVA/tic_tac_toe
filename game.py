@@ -39,17 +39,17 @@ class TicTacToe:
     def available_moves(self):
         # the long way to do it:
         # moves = []  # initialize moves to an empty list.
-        # for (i,spot) in enumerate(self.board): # basically, it attaches an object to its index place.
+        # for (i,spot) in enumerate(self.board): # basically, it attaches a value ("x" or "o") to its index place as a tuple.
         #     # ['x','x','o'] --> [(0,'x'),(1,'x'),(2,'o')]
-        #     if spot == ' ':  # meaning that it's empty and available for use.
+        #     if spot == ' ':      # meaning that it's empty and available for use.
         #         moves.append(i)  # we append that index to know that it's been taken. 
         #         return moves
     
-        # using list comprehension:
-        return [i for i, spot in emumerate(self.board) if spot == ' ']
-        # basically, this says: "when enumerating through (i, spot),
-        # if the spot is empty, put it into this list." (where is 'moves' here?)
-
+        # the same thing, using list comprehension:
+        return [i for i, spot in enumerate(self.board) if spot == ' ']
+        # basically, this says: "when enumerating through the tuples of (i, spot),
+        # if 'spot' is empty, put it into this list (which is what enumerate() creates for us)."
+        # it then returns this list (makes it available outside of this function)
     def empty_squares(self):
         # return ' ' in self.board # this will just return a boolean if the selection is an empty space
         return self.board.count(' ') # she opted to just count the spaces in the board; seems easier

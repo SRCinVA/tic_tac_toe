@@ -15,9 +15,10 @@ class RandomComputerPlayer(Player): # notice we take in the Player class
                                     # 'super' gives access to methods and properties in the parent or sibling class, or makes that easier
                                     # b/c of inheritance here, you dont use 'self' (I guess?)
     def get_move(self,game):
-        square = random.choice(game.available_moves)# the player can randomly start anywhere
-                                                    # then we pass in game.available_moves (in other file)
-        return square   # this just gives us a random valid spot
+        square = random.choice(game.available_moves)    # the computer can randomly start anywhere
+                                                        # then we pass in game.available_moves (in game.py)
+                                                        # remember that 'game' is our board.
+        return square                                   # this just gives us a random valid spot
 
 
 class HumanPlayer(Player):
@@ -26,9 +27,9 @@ class HumanPlayer(Player):
 
     def get_move(self, game):
         # before the player has input a letter to play
-        valid_square = False # we want the human to be able to give input through the terminal
+        valid_square = False     # lets the human input through the terminal. Starts 'False' because there is no input yet.
         val = None
-        while not valid_square: # meaning, when the square is in fact valid ...
+        while not valid_square:  # meaning, when the square is in fact valid ...
             square = input(self.letter + '\'s turn. Input move (0-8)')
             # now we have to make sure that the input is valid
             try:
