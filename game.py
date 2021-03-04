@@ -51,8 +51,8 @@ class TicTacToe:
         # if 'spot' is empty, put it into this list (which is what enumerate() creates for us)."
         # it then returns this list (makes it available outside of this function)
     def empty_squares(self):
-        # return ' ' in self.board # this will just return a boolean if the selection is an empty space
-        return self.board.count(' ') # she opted to just count the spaces in the board; seems easier
+        # return ' ' in self.board     # this will just return a boolean if the selection is an empty space
+        return self.board.count(' ')   # she opted to just count the empty spaces in the board; seems easier
 
 
     # we might want to know the number of empty squares
@@ -101,18 +101,17 @@ class TicTacToe:
         return False
 
 # notice that this function exists outside of the TicTacToe class
-def play(game, x_player, o_player, print_game=True):
+def play(game, x_player, o_player, print_game=True): # if a human is playing, show the board
     if print_game: #meaning, if we want to see it
-        game.print_board_nums # this way we can see which number corresonds to which spot.
+        game.print_board_nums() # put print_board_nums against 'game' (but where is 'game' coming from?)
 
     letter = "X" # a starting letter
     # iterate while the game has empty squares
-    # (we don't have to worry about a winner because we'll
-    # just return whatever breaks the loop).
+    # don't worry about a winner; because we'll just return whatever breaks the loop). (I guess we'll see)
 
     # she calls this "the play loop" (which makes sense):
-    while game.empty_squares(): # for checking if the game has empty squares
-        # while there are emptyspaces, let's get the next move from the appropriate player
+    while game.empty_squares(): # to check if the game has empty squares
+        # while there are empty spaces, let's get the next move from the appropriate player
         if letter == "0":
             square = o_player.get_move(game)
         else:

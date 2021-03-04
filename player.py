@@ -29,18 +29,19 @@ class HumanPlayer(Player):
         # before the player has input a letter to play
         valid_square = False     # lets the human input through the terminal. Starts 'False' because there is no input yet.
         val = None
-        while not valid_square:  # meaning, when the square is in fact valid ...
-            square = input(self.letter + '\'s turn. Input move (0-8)')
+        while not valid_square:  # meaning, "not False," so the square is in fact valid ...
+            square = input(self.letter + '\'s turn. Input move (0-8)')  # square will be set to the input received.
+                                                                        # looks like that input will be called "letter"
             # now we have to make sure that the input is valid
             try:
-                val = int(square)   # to make sure they actually put in an integer
+                val = int(square)   # to make sure the player actually put in an integer into "square" above.
                                     # if it can't be cast to an int, it will throw an error.
-                if val not in game.available_moves():
+                if val not in game.available_moves():   # also, if it's not in the set of available moves, it will also be invalid.
                     raise ValueError     
+
                 # if we pass both of those conditions, then we can go to the condition below:
                 valid_square = True    
-            # next, if we don't get to "True," then we "catch" that ValueError outside of the "try" block:
-            except ValueError:
+            except ValueError:  # next, if we don't get to "True," we "catch" the ValueError outside of the "try" block:
                 print("Invalid square; try again!")   
-        #after all of this, and we get a valid square, we return it and it becomes the human player's next move.
+        #after all of this, and we've gotten a valid square, we return it and it becomes the human player's next move.
         return val
