@@ -50,22 +50,19 @@ class TicTacToe:
         # basically, this says: "when enumerating through the tuples of (i, spot),
         # if 'spot' is empty, put it into this list (which is what enumerate() creates for us)."
         # it then returns this list (makes it available outside of this function)
+    
     def empty_squares(self):
-        # return ' ' in self.board     # this will just return a boolean if the selection is an empty space
-        return self.board.count(' ')   # she opted to just count the empty spaces in the board; seems easier
+        return ' ' in self.board     # returns a boolean if the selection is an empty space
 
-
-    # we might want to know the number of empty squares
+        # to count the number of empty squares
     def num_empty_squares(self):
-        return len(self.available_moves())
-        # the above will retutn the available_moves list, and we can count the number of empty spots
+        return self.board.count(' ')# returns the available_moves list, so we can count the available spaces
 
     # to actually make a move
     def make_move(self, square, letter):
-        # if we're going to make a move, then we need to be sure it's valid
-        # If valid, it returns True; if not, then False
-        if self.board[square] == ' ': # if that square on the board is empty ...
-            self.board[square] = letter # ... then put the letter in that space.
+        # to make a move, be sure it's valid. If valid, returns True; if not, then False.
+        if self.board[square] == ' ': # if that square is empty ...
+            self.board[square] = letter # ... then the letter goes in that space.
             # now you need to check if you actually won (we'll do this later):
             if self.winner(square, letter): # passes in last move, but WTF did 'winner' come from??
                 self.current_winner = letter
@@ -111,7 +108,7 @@ def play(game, x_player, o_player, print_game=True): # if a human is playing, sh
 
     # she calls this "the play loop" (which makes sense):
     while game.empty_squares(): # to check if the game has empty squares
-        # while there are empty spaces, let's get the next move from the appropriate player
+        # while there are empty spaces, get the next move from the appropriate player:
         if letter == "0":
             square = o_player.get_move(game)
         else:
@@ -122,7 +119,7 @@ def play(game, x_player, o_player, print_game=True): # if a human is playing, sh
             if print_game:
                 print(letter + f' makes a move to square {square}')
                 game.print_board() # so that we can see what the user just did
-                print('')
+                print('')          # just an empty next line.
 
             if game.current_winner: # *seems* this serves as a checker to make sure there's no winner
                 if print_game: # not sure why this line is needed
