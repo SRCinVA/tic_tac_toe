@@ -64,8 +64,8 @@ class TicTacToe:
         if self.board[square] == ' ': # if that square is empty ...
             self.board[square] = letter # ... then the letter goes in that space.
             # now you need to check if you actually won (we'll do this later):
-            if self.winner(square, letter): # passes in last move, but WTF did 'winner' come from??
-                self.current_winner = letter
+            if self.winner(square, letter): # passes in last move ("we'll come back to the winner function")
+                self.current_winner = letter # if that's true, then we can assign current_winner to that letter (X or O)
             return True
         else:
             return False
@@ -73,8 +73,8 @@ class TicTacToe:
     def winner(self, square, letter):
         # we have to check all possibilities of three in a row.
         # first check the row
-        row_ind = square // 3  # divide by three and then round down. Don't understand what this is achieving.
-        row = self.board[row_ind*3 : (row_ind + 1)] # not at all clear what this is.
+        row_ind = square // 3  # divide by three and then round down. Ex: if square = 5, divide by 3 = 1.67 (row 1)
+        row = self.board[row_ind*3 : (row_ind + 1) * 3] # this just highlights the three possible rows
         if all([spot == letter for spot in row]):   # "spot" is just a name; the important thing is the list comprehension syntax.
                                                     # if all of these items are True ...
             return True
@@ -121,7 +121,7 @@ def play(game, x_player, o_player, print_game=True): # if a human is playing, sh
                 game.print_board() # so that we can see what the user just did
                 print('')          # just an empty next line.
 
-            if game.current_winner: # *seems* this serves as a checker to make sure there's no winner
+            if game.current_winner: # implies "if True" and no longer set to None, then this is our checker
                 if print_game: # not sure why this line is needed
                     print(letter + ' wins!')
                 return letter
