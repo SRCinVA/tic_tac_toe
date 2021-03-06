@@ -72,23 +72,22 @@ class TicTacToe:
 
     def winner(self, square, letter):
         # we have to check all possibilities of three in a row.
-        # first check the row
+        # check rows
         row_ind = square // 3  # divide by three and then round down. Ex: if square = 5, divide by 3 = 1.67 (row 1)
         row = self.board[row_ind*3 : (row_ind + 1) * 3] # this just highlights the three possible rows
-        if all([spot == letter for spot in row]):   # "spot" is just a name; the important thing is the list comprehension syntax.
-                                                    # if all of these items are True ...
+        if all([spot == letter for spot in row]):   # "if all spots (or whatever) equal the same letter for spots in this row ...
             return True
         
         # check columns
-        col_ind = square % 3   # same (unclear) reasoning employed as above.
-        column = [self.board[col_ind+1*3] for i in range(3)]  # a mystery ...
-        if all([spot == letter for spot in column]):
+        col_ind = square % 3   # the modulus of 8 is 2 (making it the third column, according to index)
+        column = [self.board[col_ind+1*3] for i in range(3)]  # Ex.: [1 + (2*3)] = spot 7; tells us all spot indexes on the board by column.
+        if all([spot == letter for spot in column]): # same reason as above.
             return True
 
-        # check diagonals
-        if square % 2 == 0:
-            diagonal1 = [self.board[i] for i in [0,4,8]]
-            if all([spot == letter for spot in diagonal1]): # can use a similar checker
+        # check diagonals (we basically hard code these)
+        if square % 2 == 0: # these are the only spots possible for either diagonal
+            diagonal1 = [self.board[i] for i in [0,4,8]] # <i> is just spot holder as the "for" statement traverses 0,4, and 8 and puts them in a list.
+            if all([spot == letter for spot in diagonal1]): # a similar checker to above
                 return True
             diagonal2 = [self.board[i] for i in [2,4,6]]
             if all([spot == letter for spot in diagonal2]):
@@ -140,7 +139,7 @@ def play(game, x_player, o_player, print_game=True): # if a human is playing, sh
         time.sleep(0.8)
 
 
-    if print_game: # here, if we fall out of the first loop, then there was no winner. 
+    if print_game: # here, if we fall out of the while loop, then there was no winner (it was a tie)
         print("It\'s a tie!")
 
 if __name__ == '__main__':  # What in the world is going on with this line? Can't you just set up __main__ as a standalone?
