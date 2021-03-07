@@ -1,5 +1,5 @@
 import time
-from player import HumanPlayer, RandomComputerPlayer
+from player import HumanPlayer, RandomComputerPlayer # related to __name__ statement below
 
 class TicTacToe:
     def __init__(self):
@@ -27,9 +27,8 @@ class TicTacToe:
     def print_board_nums(): # this doesn't relate to any specific board, so we don't have to pass in self (makes sense).
         number_board = [[str(i) for i in range(j*3, (j+1)*3)] for j in range(3)]
         # iterating over 'j' feeds in exactly like printing the board, to manufacture all of the row "chunks"
-        # "this is saying 'give me the indices of thw rows, for all of the rows'."
-        # question: unsure what's going on with str(i) here ...
-        # "i" is probably the "x" or "o" that gets dropped into the (0,1,2) or (3,4,5) or (6,7,8)
+        # "this is saying 'give me the indices of the rows, for all of the rows'."
+        # "i" is the "x" or "o" String that gets dropped into the (0,1,2) or (3,4,5) or (6,7,8)
         # that is created by the iteration over 'j'
         
         # now, we concatenate the strings and print the board, like above:
@@ -106,12 +105,12 @@ def play(game, x_player, o_player, print_game=True): # if a human is playing, sh
     # don't worry about a winner; because we'll just return whatever breaks the loop). (I guess we'll see)
 
     # she calls this "the play loop" (which makes sense):
-    while game.empty_squares(): # to check if the game has empty squares
+    while game.empty_squares(): #to check if the game has empty squares
         # while there are empty spaces, get the next move from the appropriate player:
         if letter == "0":
             square = o_player.get_move(game)
         else:
-            square = x_player.getmove(game)
+            square = x_player.get_move(game)
 
     # define a function to actually make a move
         if game.make_move(square, letter): # meaning, "is valid":
@@ -128,7 +127,7 @@ def play(game, x_player, o_player, print_game=True): # if a human is playing, sh
             # after making a single move, we need to alternate letters
             # here, we assign the letter to 'O' if it's currently 'X',
             # otherwise, we just assign 'letter' to 'X' (don't even need the rest of the statement)
-            letter = 'O' if letter 'X' == 'X' else 'X'
+            letter = 'O' if letter == 'X' else 'X'
             # another way to do this is below (probably what I would have done):
             # if letter == 'X':
             #   letter = 'O'
@@ -138,12 +137,11 @@ def play(game, x_player, o_player, print_game=True): # if a human is playing, sh
         # let's introduce a pause of 0.8 seconds
         time.sleep(0.8)
 
-
     if print_game: # here, if we fall out of the while loop, then there was no winner (it was a tie)
         print("It\'s a tie!")
 
-if __name__ == '__main__':  # What in the world is going on with this line? Can't you just set up __main__ as a standalone?
-    x_player = HumanPlayer('X')
+if __name__ == '__main__': # it seems (?) that this sets 'game.py' as the main file.
+    x_player = HumanPlayer('X')    # not clear what's going on with these importations.
     o_player = RandomComputerPlayer('O')
-    t = TicTacToe
+    t = TicTacToe()
     play(t, x_player, o_player, print_game=True)
