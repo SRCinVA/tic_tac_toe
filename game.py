@@ -66,20 +66,19 @@ class TicTacToe:
             if self.winner(square, letter): # passes in last move ("we'll come back to the winner function")
                 self.current_winner = letter # if that's true, then we can assign current_winner to that letter (X or O)
             return True
-        else:
-            return False
+        return False
 
     def winner(self, square, letter):
         # we have to check all possibilities of three in a row.
         # check rows
-        row_ind = square // 3  # divide by three and then round down. Ex: if square = 5, divide by 3 = 1.67 (row 1)
+        row_ind = square//3  # divide by three and then round down. Ex: if square = 5, divide by 3 = 1.67 (row 1)
         row = self.board[row_ind*3 : (row_ind + 1) * 3] # this just highlights the three possible rows
         if all([spot == letter for spot in row]):   # "if all spots (or whatever) equal the same letter for spots in this row ...
             return True
         
         # check columns
         col_ind = square % 3   # the modulus of 8 is 2 (making it the third column, according to index)
-        column = [self.board[col_ind+1*3] for i in range(3)]  # Ex.: [1 + (2*3)] = spot 7; tells us all spot indexes on the board by column.
+        column = [self.board[col_ind+i*3] for i in range(3)]  # Ex.: [1 + (2*3)] = spot 7; tells us all spot indexes on the board by column.
         if all([spot == letter for spot in column]): # same reason as above.
             return True
 
@@ -100,14 +99,14 @@ def play(game, x_player, o_player, print_game=True): # if a human is playing, sh
     if print_game: #meaning, if we want to see it
         game.print_board_nums() # put print_board_nums against 'game' (but where is 'game' coming from?)
 
-    letter = "X" # a starting letter
+    letter = 'X' # a starting letter
     # iterate while the game has empty squares
     # don't worry about a winner; because we'll just return whatever breaks the loop). (I guess we'll see)
 
     # she calls this "the play loop" (which makes sense):
     while game.empty_squares(): #to check if the game has empty squares
         # while there are empty spaces, get the next move from the appropriate player:
-        if letter == "0":
+        if letter == 'O':
             square = o_player.get_move(game)
         else:
             square = x_player.get_move(game)
@@ -133,12 +132,11 @@ def play(game, x_player, o_player, print_game=True): # if a human is playing, sh
             #   letter = 'O'
             # else:
             #   letter = 'X' 
-
         # let's introduce a pause of 0.8 seconds
-        time.sleep(0.8)
+        time.sleep(.8)
 
     if print_game: # here, if we fall out of the while loop, then there was no winner (it was a tie)
-        print("It\'s a tie!")
+        print('It\'s a tie!')
 
 if __name__ == '__main__': # it seems (?) that this sets 'game.py' as the main file.
     x_player = HumanPlayer('X')    # not clear what's going on with these importations.

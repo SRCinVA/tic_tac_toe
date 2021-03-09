@@ -15,7 +15,7 @@ class RandomComputerPlayer(Player): # notice we take in the Player class
                                     # 'super' gives access to methods and properties in the parent or sibling class, or makes that easier
                                     # b/c of inheritance here, you dont use 'self' (I guess?)
     def get_move(self,game):
-        square = random.choice(game.available_moves)    # the computer can randomly start anywhere
+        square = random.choice(game.available_moves())    # the computer can randomly start anywhere
                                                         # then we pass in game.available_moves (in game.py)
                                                         # remember that 'game' is our board.
         return square                                   # this just gives us a random valid spot
@@ -30,7 +30,7 @@ class HumanPlayer(Player):
         valid_square = False     # lets the human input through the terminal. Starts 'False' because there is no input yet.
         val = None
         while not valid_square:  # meaning, "not False," so the square is in fact valid ...
-            square = input(self.letter + '\'s turn. Input move (0-8)')  # square will be set to the input received.
+            square = input(self.letter + '\'s turn. Input move (0-8):')  # square will be set to the input received.
                                                                         # looks like that input will be called "letter"
             # now we have to make sure that the input is valid
             try:
@@ -42,6 +42,6 @@ class HumanPlayer(Player):
                 # if we pass both of those conditions, then we can go to the condition below:
                 valid_square = True    
             except ValueError:  # next, if we don't get to "True," we "catch" the ValueError outside of the "try" block:
-                print("Invalid square; try again!")   
+                print('Invalid square; try again!')   
         #after all of this, and we've gotten a valid square, we return it and it becomes the human player's next move.
         return val
